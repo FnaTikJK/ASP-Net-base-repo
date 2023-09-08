@@ -19,6 +19,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonConfig.DateOnlyJsonConverter());
 });
+// Добавляем базовый маппинг (сейчас он тупо маппит DateOnly и DateTime)
+builder.Services.AddAutoMapper(typeof(BaseMappingProfile));
+// Регистрируем модули через Extensions
+builder.Services.RegisterModules();
 
 var app = builder.Build();
 
