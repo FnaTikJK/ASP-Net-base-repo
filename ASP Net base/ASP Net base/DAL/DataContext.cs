@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ASP_Net_base.Modules.Accounts;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASP_Net_base.DAL
 {
@@ -8,15 +9,17 @@ namespace ASP_Net_base.DAL
         {
         }
 
-        public void InitDb()
+        public void RecreateDatabase()
         {
-            Database.EnsureCreated();
             Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
         }
+
+        public DbSet<AccountEntity> Accounts => Set<AccountEntity>();
     }
 }
