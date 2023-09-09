@@ -15,7 +15,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie();
 builder.Services.AddAuthorization();
 
-// Регистрируем DbContext в DI Container
+// Регистрируем DbContext в DI Container.
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder =>
@@ -24,14 +24,14 @@ builder.Services.AddDbContext<DataContext>(options =>
     });
 });
 
-// Добавляем нужные сериализации для API
+// Добавляем нужные сериализации для API.
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonConfig.DateOnlyJsonConverter());
 });
-// Добавляем базовый маппинг (сейчас он тупо маппит DateOnly и DateTime)
+// Добавляем базовый маппинг (сейчас он тупо маппит DateOnly и DateTime).
 builder.Services.AddAutoMapper(typeof(BaseMappingProfile));
-// Регистрируем модули через Extensions
+// Регистрируем модули через Extensions.
 builder.Services.RegisterModules();
 
 var app = builder.Build();
