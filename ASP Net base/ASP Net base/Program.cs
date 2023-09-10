@@ -33,6 +33,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddAutoMapper(typeof(BaseMappingProfile));
 // Register IModules by Extensions
 builder.Services.RegisterModules();
+// Add WebSockets
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -48,5 +50,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.ConfigureHubs();
 
 app.Run();

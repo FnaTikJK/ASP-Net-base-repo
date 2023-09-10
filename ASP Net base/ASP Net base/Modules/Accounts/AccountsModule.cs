@@ -15,5 +15,9 @@ namespace ASP_Net_base.Modules.Accounts
 
             return services;
         }
+
+        public void ConfigureHubs(WebApplication app)
+        {
+        }
     }
 }
