@@ -31,9 +31,13 @@ namespace ASP_Net_base.Modules.Accounts
         public async Task<ActionResult> LoginAsync([FromBody]LoginRequest loginRequest)
         {
             var response = await accountsService.LoginAsync(loginRequest);
+            if (!response.IsSuccess)
+                return BadRequest(response.Error);
 
-            return response.IsSuccess ? NoContent() 
-                : BadRequest(response.Error);
+            var principal = new ClaimsPrincipal(response.Value);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            return NoContent();
         }
 
         [HttpPost("Logout")]
